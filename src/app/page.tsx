@@ -1,15 +1,30 @@
+
+'use client'
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Image from 'next/image';
-import { products } from '@/lib/products';
+import { products, type Product } from '@/lib/products';
+import { useCart } from '@/context/CartContext';
+import { toast } from '@/hooks/use-toast';
 
-const featuredProducts = products.slice(0, 3);
-const popularProducts = products.slice(3, 6);
-const comboProducts = [products[0], products[2]];
+const featuredProducts = products.filter(p => !p.isCombo).slice(0, 3);
+const popularProducts = products.filter(p => !p.isCombo).slice(3, 6);
+const comboProducts = products.filter(p => p.isCombo);
 
 
 export default function Home() {
+    const { addToCart } = useCart();
+
+    const handleAddToCart = (product: Product) => {
+        addToCart(product);
+        toast({
+        title: "Added to cart",
+        description: `${product.name} has been added to your cart.`,
+        });
+    }
+
   return (
     <>
       <section className="py-20 md:py-32 bg-secondary/50">
@@ -106,58 +121,40 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Combos</h2>
           <p className="mt-2 text-center text-muted-foreground">Get the best of both worlds with our curated coffee combos.</p>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="md:flex">
-                <div className="md:w-1/2">
-                    <Image
-                        src={comboProducts[0].imageUrls[0]}
-                        alt={comboProducts[0].name}
-                        width={600}
-                        height={400}
-                        className="object-cover w-full h-full"
-                        data-ai-hint={comboProducts[0].dataAiHint}
-                    />
-                </div>
-                <div className="p-6 md:w-1/2">
-                    <CardTitle className="font-headline text-xl">Light & Dark Duo</CardTitle>
-                    <CardDescription className="mt-2">Experience the full spectrum of flavor.</CardDescription>
-                    <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                        <li>- {comboProducts[0].name}</li>
-                        <li>- {comboProducts[1].name}</li>
-                    </ul>
-                    <div className="mt-4 flex justify-between items-center">
-                        <span className="text-lg font-semibold text-primary">$40.00 <span className="text-sm text-muted-foreground line-through">$43.00</span></span>
-                        <Button>Add Combo to Cart</Button>
+            {comboProducts.map((combo) => (
+                <Card key={combo.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="md:flex">
+                    <div className="md:w-1/2">
+                        <Link href={`/products/${combo.id}`}>
+                            <Image
+                                src={combo.imageUrls[0]}
+                                alt={combo.name}
+                                width={600}
+                                height={400}
+                                className="object-cover w-full h-full"
+                                data-ai-hint={combo.dataAiHint}
+                            />
+                        </Link>
+                    </div>
+                    <div className="p-6 md:w-1/2 flex flex-col">
+                        <Link href={`/products/${combo.id}`} className="flex-grow">
+                            <CardTitle className="font-headline text-xl">{combo.name}</CardTitle>
+                            <CardDescription className="mt-2">{combo.description.substring(0, 100)}...</CardDescription>
+                            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                                {combo.comboProducts?.map(p => <li key={p.id}>- {p.name}</li>)}
+                            </ul>
+                        </Link>
+                        <div className="mt-4 flex justify-between items-center">
+                            <span className="text-lg font-semibold text-primary">
+                                ${combo.price.toFixed(2)}{' '}
+                                {combo.originalPrice && <span className="text-sm text-muted-foreground line-through">${combo.originalPrice.toFixed(2)}</span>}
+                            </span>
+                            <Button onClick={() => handleAddToCart(combo)}>Add to Cart</Button>
+                        </div>
                     </div>
                 </div>
-              </div>
-            </Card>
-            <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-               <div className="md:flex">
-                <div className="md:w-1/2">
-                    <Image
-                        src={comboProducts[1].imageUrls[1]}
-                        alt={comboProducts[1].name}
-                        width={600}
-                        height={400}
-                        className="object-cover w-full h-full"
-                        data-ai-hint={comboProducts[1].dataAiHint}
-                    />
-                </div>
-                <div className="p-6 md:w-1/2">
-                    <CardTitle className="font-headline text-xl">Medium Roast Sampler</CardTitle>
-                    <CardDescription className="mt-2">A tour of our most popular medium roasts.</CardDescription>
-                     <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                        <li>- Colombian Supremo</li>
-                        <li>- Guatemala Antigua</li>
-                    </ul>
-                    <div className="mt-4 flex justify-between items-center">
-                        <span className="text-lg font-semibold text-primary">$36.00 <span className="text-sm text-muted-foreground line-through">$39.50</span></span>
-                        <Button>Add Combo to Cart</Button>
-                    </div>
-                </div>
-              </div>
-            </Card>
+                </Card>
+            ))}
           </div>
         </div>
       </section>

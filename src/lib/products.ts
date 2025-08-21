@@ -1,16 +1,19 @@
 export interface Product {
   id: number;
   name: string;
-  origin: string;
+  origin?: string;
   price: number;
-  roast: 'Light' | 'Medium' | 'Dark' | 'Light-Medium' | 'Medium-Dark';
-  notes: string;
+  originalPrice?: number;
+  roast?: 'Light' | 'Medium' | 'Dark' | 'Light-Medium' | 'Medium-Dark';
+  notes?: string;
   imageUrls: string[];
   dataAiHint: string;
   description: string;
-  specs: { [key: string]: string };
-  rating: number;
-  reviews: number;
+  specs?: { [key: string]: string };
+  rating?: number;
+  reviews?: number;
+  isCombo?: boolean;
+  comboProducts?: { name: string, id: number }[];
 }
 
 export const products: Product[] = [
@@ -153,4 +156,42 @@ export const products: Product[] = [
     rating: 4.5,
     reviews: 301,
   },
+  {
+    id: 7,
+    name: 'Light & Dark Duo',
+    price: 40.00,
+    originalPrice: 43.00,
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
+    dataAiHint: 'coffee combo',
+    description: 'Experience the full spectrum of flavor with our Light & Dark Duo. This combo features a bag of our bright and floral Ethiopian Yirgacheffe light roast, and a bag of our bold and earthy Sumatra Mandheling dark roast. It\'s the perfect way to explore two distinct and delicious coffee profiles.',
+    isCombo: true,
+    comboProducts: [
+      { name: 'Ethiopian Yirgacheffe', id: 1 },
+      { name: 'Sumatra Mandheling', id: 3 },
+    ],
+    rating: 4.8,
+    reviews: 42,
+  },
+  {
+    id: 8,
+    name: 'Medium Roast Sampler',
+    price: 36.00,
+    originalPrice: 39.50,
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
+    dataAiHint: 'coffee sampler',
+    description: 'Take a tour of our most popular medium roasts. This sampler includes a bag of the classic, well-balanced Colombian Supremo and a bag of the beautifully structured Guatemala Antigua. Discover the rich chocolate, toffee, and caramel notes that make these coffees perennial favorites.',
+    isCombo: true,
+    comboProducts: [
+      { name: 'Colombian Supremo', id: 2 },
+      { name: 'Guatemala Antigua', id: 5 },
+    ],
+    rating: 4.7,
+    reviews: 78,
+  }
 ];

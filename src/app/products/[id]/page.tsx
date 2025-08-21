@@ -1,8 +1,9 @@
 
+
 'use client'
 
 import { use, useState } from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { products } from '@/lib/products';
 import type { Product } from '@/lib/products';
 import Image from 'next/image';
@@ -36,6 +37,7 @@ function ProductRating({ rating, reviews }: { rating: number; reviews: number })
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
+  const router = useRouter();
   const { addToCart } = useCart();
   
   const product = products.find((p) => p.id.toString() === resolvedParams.id);
@@ -46,7 +48,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     notFound();
   }
 
-  const relatedProducts = products.filter(p => p.id !== product.id && p.roast === product.roast).slice(0, 3);
+  const relatedProducts = product.isCombo 
+    ? products.filter(p => p.isCombo && p.id !== product.id).slice(0,3)
+    : products.filter(p => !p.isCombo && p.id !== product.id && p.roast === product.roast).slice(0, 3);
   
   const handleAddToCart = (product: Product) => {
     addToCart(product);
@@ -84,14 +88,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         </div>
         <div className="space-y-6">
           <div>
-            <p className="text-sm text-muted-foreground">{product.origin}</p>
+            {product.origin && <p className="text-sm text-muted-foreground">{product.origin}</p>}
             <h1 className="text-4xl font-headline font-bold">{product.name}</h1>
-            <p className="text-lg text-muted-foreground mt-2">Notes: {product.notes}</p>
+            {product.notes && <p className="text-lg text-muted-foreground mt-2">Notes: {product.notes}</p>}
           </div>
           
-          <ProductRating rating={product.rating} reviews={product.reviews} />
+          {product.rating && product.reviews && <ProductRating rating={product.rating} reviews={product.reviews} />}
 
-          <p className="text-4xl font-bold text-primary">${product.price.toFixed(2)}</p>
+          <p className="text-4xl font-bold text-primary">
+            ${product.price.toFixed(2)}{' '}
+            {product.originalPrice && (
+              <span className="text-2xl text-muted-foreground line-through ml-2">${product.originalPrice.toFixed(2)}</span>
+            )}
+          </p>
 
           <Card className="bg-secondary/50">
              <CardContent className="p-4 space-y-3 text-sm">
@@ -119,14 +128,27 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <p className="text-muted-foreground mt-2">{product.description}</p>
           </div>
           
-          <div>
-            <h3 className="font-bold font-headline text-lg">Specifications</h3>
-            <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
-                {Object.entries(product.specs).map(([key, value]) => (
-                    <li key={key}><strong>{key}:</strong> {value}</li>
-                ))}
-            </ul>
-          </div>
+          {product.isCombo && product.comboProducts && (
+             <div>
+                <h3 className="font-bold font-headline text-lg">What's Inside</h3>
+                <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                    {product.comboProducts.map((p) => (
+                        <li key={p.id}><Link href={`/products/${p.id}`} className="text-primary hover:underline">{p.name}</Link></li>
+                    ))}
+                </ul>
+            </div>
+          )}
+
+          {product.specs && (
+            <div>
+                <h3 className="font-bold font-headline text-lg">Specifications</h3>
+                <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
+                    {Object.entries(product.specs).map(([key, value]) => (
+                        <li key={key}><strong>{key}:</strong> {value}</li>
+                    ))}
+                </ul>
+            </div>
+          )}
         </div>
       </div>
       
@@ -148,9 +170,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   </CardHeader>
                   <CardContent className="p-6">
                     <CardTitle className="font-headline text-xl">{related.name}</CardTitle>
-                    <CardDescription className="mt-2">{related.origin}</CardDescription>
+                    {related.origin && <CardDescription className="mt-2">{related.origin}</CardDescription>}
                     <div className="mt-4 flex justify-between items-center">
-                      <span className="text-lg font-semibold text-primary">${related.price.toFixed(2)}</span>
+                       <span className="text-lg font-semibold text-primary">
+                            ${related.price.toFixed(2)}{' '}
+                            {related.originalPrice && <span className="text-sm text-muted-foreground line-through">${related.originalPrice.toFixed(2)}</span>}
+                        </span>
                        <Button variant="outline" asChild>
                         <span>View Details</span>
                       </Button>
