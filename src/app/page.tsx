@@ -13,6 +13,17 @@ const featuredProducts = products.filter(p => !p.isCombo).slice(0, 3);
 const popularProducts = products.filter(p => !p.isCombo).slice(3, 6);
 const comboProducts = products.filter(p => p.isCombo);
 
+const categories = products.reduce((acc, product) => {
+    if (product.roast && !acc.some(cat => cat.name === product.roast)) {
+      acc.push({
+        name: product.roast,
+        imageUrl: product.imageUrls[0],
+        dataAiHint: product.dataAiHint,
+      });
+    }
+    return acc;
+  }, [] as { name: string; imageUrl: string; dataAiHint: string }[]).sort((a, b) => a.name.localeCompare(b.name));
+
 
 export default function Home() {
     const { addToCart } = useCart();
@@ -48,6 +59,32 @@ export default function Home() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Shop by Category</h2>
+           <p className="mt-2 text-center text-muted-foreground">Find your favorite roast.</p>
+          <div className="mt-12">
+            <div className="flex justify-center gap-8 md:gap-12 overflow-x-auto pb-4 -mx-4 px-4">
+              {categories.map((category) => (
+                <Link href="/products" key={category.name} className="flex flex-col items-center gap-3 flex-shrink-0 group">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-transparent group-hover:border-accent transition-all duration-300 shadow-lg">
+                    <Image
+                      src={category.imageUrl}
+                      alt={category.name}
+                      width={128}
+                      height={128}
+                      className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-300"
+                      data-ai-hint={category.dataAiHint}
+                    />
+                  </div>
+                  <span className="font-headline text-lg font-semibold text-primary">{category.name} Roast</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Featured Coffees</h2>
           <p className="mt-2 text-center text-muted-foreground">Hand-picked by our experts, loved by our community.</p>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -81,7 +118,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-secondary/50">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Popular Choices</h2>
           <p className="mt-2 text-center text-muted-foreground">Discover what other coffee lovers are enjoying.</p>
@@ -116,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Combos</h2>
           <p className="mt-2 text-center text-muted-foreground">Get the best of both worlds with our curated coffee combos.</p>
