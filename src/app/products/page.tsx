@@ -1,25 +1,13 @@
-'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Image from 'next/image';
-import { useCart } from '@/context/CartContext';
-import { toast } from '@/hooks/use-toast';
 import { products } from '@/lib/products';
-import type { Product } from '@/lib/products';
+import ProductCardActions from '@/components/ProductCardActions';
 
 export default function ProductsPage() {
-  const { addToCart } = useCart();
-
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-  }
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-12">
@@ -73,10 +61,7 @@ export default function ProductsPage() {
               </CardContent>
             </Link>
              <div className="p-6 pt-0">
-                <Button onClick={(e) => {
-                  e.stopPropagation();
-                  handleAddToCart(product)
-                }} className="w-full">Add to Cart</Button>
+                <ProductCardActions product={product} />
               </div>
           </Card>
         ))}

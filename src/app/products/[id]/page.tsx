@@ -1,21 +1,14 @@
 
-
-'use client'
-
-import { use, useState } from 'react';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { products } from '@/lib/products';
-import type { Product } from '@/lib/products';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Star, Truck, CreditCard, ShieldCheck, Heart } from 'lucide-react';
+import { Star, Truck, CreditCard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
-import { useWishlist } from '@/context/WishlistContext';
-import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import ProductInteractions from '@/components/ProductInteractions';
 
 function ProductRating({ rating, reviews }: { rating: number; reviews: number }) {
   return (
@@ -36,83 +29,28 @@ function ProductRating({ rating, reviews }: { rating: number; reviews: number })
   );
 }
 
-export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
-  const router = useRouter();
-  const { addToCart } = useCart();
-  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
-
-  const product = products.find((p) => p.id.toString() === resolvedParams.id);
-  
-  const [activeImage, setActiveImage] = useState(product?.imageUrls[0]);
+export default async function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product = products.find((p) => p.id.toString() === params.id);
 
   if (!product) {
     notFound();
   }
 
-  const isWishlisted = wishlist.some(item => item.id === product.id);
-
-  const relatedProducts = product.isCombo 
+  const relatedProducts = product.isCombo
     ? products.filter(p => p.isCombo && p.id !== product.id).slice(0,3)
     : products.filter(p => !p.isCombo && p.id !== product.id && p.roast === product.roast).slice(0, 3);
-  
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-  }
-
-  const handleWishlistToggle = (product: Product) => {
-    if (isWishlisted) {
-      removeFromWishlist(product.id);
-      toast({
-        title: "Removed from wishlist",
-        description: `${product.name} has been removed from your wishlist.`,
-      });
-    } else {
-      addToWishlist(product);
-      toast({
-        title: "Added to wishlist",
-        description: `${product.name} has been added to your wishlist.`,
-      });
-    }
-  };
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-12">
       <div className="grid md:grid-cols-2 gap-12">
-        <div className="space-y-4">
-          <Image
-            src={activeImage || product.imageUrls[0]}
-            alt={product.name}
-            width={800}
-            height={800}
-            className="rounded-lg shadow-lg object-cover w-full aspect-square"
-            data-ai-hint={product.dataAiHint}
-          />
-          <div className="grid grid-cols-4 gap-4">
-            {product.imageUrls.map((url, index) => (
-              <button key={index} onClick={() => setActiveImage(url)} className={cn("rounded-lg overflow-hidden border-2 transition", activeImage === url ? "border-primary" : "border-transparent")}>
-                <Image
-                  src={url}
-                  alt={`${product.name} thumbnail ${index + 1}`}
-                  width={200}
-                  height={200}
-                  className="object-cover w-full aspect-square"
-                />
-              </button>
-            ))}
-          </div>
-        </div>
+        <ProductInteractions product={product} />
         <div className="space-y-6">
           <div>
             {product.origin && <p className="text-sm text-muted-foreground">{product.origin}</p>}
             <h1 className="text-4xl font-headline font-bold">{product.name}</h1>
             {product.notes && <p className="text-lg text-muted-foreground mt-2">Notes: {product.notes}</p>}
           </div>
-          
+
           {product.rating && product.reviews && <ProductRating rating={product.rating} reviews={product.reviews} />}
 
           <p className="text-4xl font-bold text-primary">
@@ -139,13 +77,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
              </CardContent>
           </Card>
           
-          <div className="flex items-center gap-4">
-            <Button size="lg" className="w-full" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
-            <Button size="lg" variant="outline" onClick={() => handleWishlistToggle(product)} className="px-4">
-              <Heart className={cn("h-6 w-6", isWishlisted && "fill-destructive text-destructive")} />
-              <span className="sr-only">Add to wishlist</span>
-            </Button>
-          </div>
+          <ProductInteractions product={product} isMainBuySection={true} />
 
           <Separator />
 
@@ -153,7 +85,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <h3 className="font-bold font-headline text-lg">Description</h3>
             <p className="text-muted-foreground mt-2">{product.description}</p>
           </div>
-          
+
           {product.isCombo && product.comboProducts && (
              <div>
                 <h3 className="font-bold font-headline text-lg">What's Inside</h3>
