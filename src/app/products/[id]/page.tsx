@@ -1,7 +1,7 @@
 
 'use client'
 
-import { use } from 'react';
+import { use, useState } from 'react';
 import { notFound } from 'next/navigation';
 import { products } from '@/lib/products';
 import type { Product } from '@/lib/products';
@@ -13,6 +13,7 @@ import { Star, Truck, CreditCard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 function ProductRating({ rating, reviews }: { rating: number; reviews: number }) {
   return (
@@ -38,6 +39,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const { addToCart } = useCart();
   
   const product = products.find((p) => p.id.toString() === resolvedParams.id);
+  
+  const [activeImage, setActiveImage] = useState(product?.imageUrls[0]);
 
   if (!product) {
     notFound();
@@ -56,15 +59,28 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   return (
     <div className="container mx-auto px-4 md:px-6 py-12">
       <div className="grid md:grid-cols-2 gap-12">
-        <div>
+        <div className="space-y-4">
           <Image
-            src={product.imageUrl}
+            src={activeImage || product.imageUrls[0]}
             alt={product.name}
             width={800}
             height={800}
-            className="rounded-lg shadow-lg object-cover w-full"
+            className="rounded-lg shadow-lg object-cover w-full aspect-square"
             data-ai-hint={product.dataAiHint}
           />
+          <div className="grid grid-cols-4 gap-4">
+            {product.imageUrls.map((url, index) => (
+              <button key={index} onClick={() => setActiveImage(url)} className={cn("rounded-lg overflow-hidden border-2 transition", activeImage === url ? "border-primary" : "border-transparent")}>
+                <Image
+                  src={url}
+                  alt={`${product.name} thumbnail ${index + 1}`}
+                  width={200}
+                  height={200}
+                  className="object-cover w-full aspect-square"
+                />
+              </button>
+            ))}
+          </div>
         </div>
         <div className="space-y-6">
           <div>
@@ -122,7 +138,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <Link href={`/products/${related.id}`} className="block">
                   <CardHeader className="p-0">
                     <Image
-                      src={related.imageUrl}
+                      src={related.imageUrls[0]}
                       alt={related.name}
                       width={600}
                       height={400}

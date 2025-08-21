@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   roast: 'Light' | 'Medium' | 'Dark' | 'Light-Medium' | 'Medium-Dark';
   notes: string;
-  imageUrl: string;
+  imageUrls: string[];
   dataAiHint: string;
   description: string;
   specs: { [key: string]: string };
@@ -21,7 +21,12 @@ export const products: Product[] = [
     price: 22.00,
     roast: 'Light',
     notes: 'Floral, Lemon, Tea',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png'
+    ],
     dataAiHint: 'coffee bag',
     description: 'A bright and aromatic light roast with delicate floral notes and a refreshing citrusy finish. Grown in the renowned Yirgacheffe region, this coffee is a testament to Ethiopia\'s rich coffee heritage.',
     specs: {
@@ -40,7 +45,11 @@ export const products: Product[] = [
     price: 19.50,
     roast: 'Medium',
     notes: 'Caramel, Nutty, Citrus',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
     dataAiHint: 'coffee beans',
     description: 'A classic, well-balanced medium roast from the heart of Colombia. Expect smooth notes of caramel and toasted nuts, with a pleasant hint of citrus acidity that brightens the cup.',
     specs: {
@@ -59,7 +68,12 @@ export const products: Product[] = [
     price: 21.00,
     roast: 'Dark',
     notes: 'Earthy, Cedar, Dark Chocolate',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png'
+    ],
     dataAiHint: 'coffee farm',
     description: 'A bold and full-bodied dark roast from the island of Sumatra. Its distinctive earthy and cedar notes are complemented by a rich, dark chocolate finish, offering a truly unique flavor experience.',
     specs: {
@@ -78,7 +92,10 @@ export const products: Product[] = [
     price: 24.00,
     roast: 'Light-Medium',
     notes: 'Blackcurrant, Winey, Bright',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
     dataAiHint: 'brewed coffee',
     description: 'Renowned for its vibrant acidity and complex fruit notes, this Kenyan coffee is a delight. Look for a distinct blackcurrant flavor with a wine-like brightness that makes for a lively and memorable cup.',
     specs: {
@@ -97,7 +114,11 @@ export const products: Product[] = [
     price: 20.00,
     roast: 'Medium',
     notes: 'Chocolate, Toffee, Apple',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
     dataAiHint: 'coffee cup',
     description: 'A beautifully structured coffee from the Antigua Valley of Guatemala. This medium roast boasts rich chocolate and toffee notes, balanced by a subtle malic acidity reminiscent of a crisp apple.',
     specs: {
@@ -116,7 +137,11 @@ export const products: Product[] = [
     price: 18.50,
     roast: 'Medium-Dark',
     notes: 'Nutty, Chocolate, Low Acidity',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
     dataAiHint: 'roasted coffee',
     description: 'A smooth and satisfying coffee from the Cerrado region of Brazil. This medium-dark roast is known for its classic nutty and chocolate flavor profile with a very low acidity, making it perfect for espresso or a rich drip brew.',
     specs: {

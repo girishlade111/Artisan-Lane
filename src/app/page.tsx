@@ -38,7 +38,7 @@ export default function Home() {
                 <Link href={`/products/${product.id}`} className="block">
                   <CardHeader className="p-0">
                     <Image
-                      src={product.imageUrl}
+                      src={product.imageUrls[0]}
                       alt={product.name}
                       width={600}
                       height={400}

@@ -34,7 +34,7 @@ export default function CartPage() {
             {cart.map((item) => (
               <Card key={item.id} className="flex items-center p-4 shadow-sm">
                 <Image
-                  src={item.imageUrl}
+                  src={item.imageUrls[0]}
                   alt={item.name}
                   width={100}
                   height={100}

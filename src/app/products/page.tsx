@@ -53,7 +53,7 @@ export default function ProductsPage() {
             <Link href={`/products/${product.id}`} className="flex flex-col flex-grow">
               <CardHeader className="p-0">
                 <Image
-                  src={product.imageUrl}
+                  src={product.imageUrls[0]}
                   alt={product.name}
                   width={600}
                   height={400}
