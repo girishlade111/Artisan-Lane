@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { products, type Product } from '@/lib/products';
 import { useCart } from '@/context/CartContext';
 import { toast } from '@/hooks/use-toast';
+import { ArrowRight } from 'lucide-react';
 
 const featuredProducts = products.filter(p => !p.isCombo).slice(0, 3);
 const popularProducts = products.filter(p => !p.isCombo).slice(3, 6);
@@ -38,21 +39,38 @@ export default function Home() {
 
   return (
     <>
-      <section className="py-20 md:py-32 bg-secondary/50">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary tracking-tight">
-            Discover Your Perfect Coffee
-          </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
-            From the world's best artisans to your cup. Personalized subscriptions tailored to your unique taste profile.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/recommend">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">Find Your Match</Button>
-            </Link>
-            <Link href="/products">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto">Shop All Coffee</Button>
-            </Link>
+      <section className="w-full py-12 md:py-24 lg:py-32">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:gap-24 items-center">
+            <div className="flex flex-col justify-center space-y-4 text-center lg:text-left">
+              <div className="space-y-2">
+                <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary tracking-tight">
+                  Discover Your Perfect Coffee
+                </h1>
+                <p className="max-w-xl text-lg md:text-xl text-muted-foreground mx-auto lg:mx-0">
+                  From the world's best artisans to your cup. Personalized subscriptions tailored to your unique taste profile.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/recommend">
+                  <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
+                    Find Your Match
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/products">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto">Shop All Coffee</Button>
+                </Link>
+              </div>
+            </div>
+             <Image
+              src="https://placehold.co/600x400.png"
+              alt="Hero Coffee"
+              width={600}
+              height={400}
+              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
+              data-ai-hint="coffee beans"
+            />
           </div>
         </div>
       </section>
