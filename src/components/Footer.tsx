@@ -11,11 +11,11 @@ export default function Footer() {
             <span className="text-lg font-bold font-headline text-primary">ArtisanLane</span>
           </div>
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
-            <Link href="#" className="hover:text-primary transition-colors">About Us</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Contact</Link>
-            <Link href="#" className="hover:text-primary transition-colors">FAQ</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/about" className="hover:text-primary transition-colors">About Us</Link>
+            <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+            <Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
           </nav>
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} ArtisanLane. All rights reserved.</p>
         </div>
