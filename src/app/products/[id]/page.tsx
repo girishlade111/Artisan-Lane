@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { Star, Truck, CreditCard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 function ProductRating({ rating, reviews }: { rating: number; reviews: number }) {
   return (
@@ -33,7 +33,6 @@ function ProductRating({ rating, reviews }: { rating: number; reviews: number })
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const { addToCart } = useCart();
-  const { toast } = useToast();
   
   const product = products.find((p) => p.id.toString() === params.id);
 

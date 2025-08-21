@@ -6,13 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 import { products } from '@/lib/products';
 import type { Product } from '@/lib/products';
 
 export default function ProductsPage() {
   const { addToCart } = useCart();
-  const { toast } = useToast();
 
   const handleAddToCart = (product: Product) => {
     addToCart(product);
