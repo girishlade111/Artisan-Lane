@@ -10,9 +10,10 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Star, Truck, CreditCard, ShieldCheck } from 'lucide-react';
+import { Star, Truck, CreditCard, ShieldCheck, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
@@ -39,7 +40,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const resolvedParams = use(params);
   const router = useRouter();
   const { addToCart } = useCart();
-  
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
   const product = products.find((p) => p.id.toString() === resolvedParams.id);
   
   const [activeImage, setActiveImage] = useState(product?.imageUrls[0]);
@@ -47,6 +49,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   if (!product) {
     notFound();
   }
+
+  const isWishlisted = wishlist.some(item => item.id === product.id);
 
   const relatedProducts = product.isCombo 
     ? products.filter(p => p.isCombo && p.id !== product.id).slice(0,3)
@@ -59,6 +63,22 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       description: `${product.name} has been added to your cart.`,
     });
   }
+
+  const handleWishlistToggle = (product: Product) => {
+    if (isWishlisted) {
+      removeFromWishlist(product.id);
+      toast({
+        title: "Removed from wishlist",
+        description: `${product.name} has been removed from your wishlist.`,
+      });
+    } else {
+      addToWishlist(product);
+      toast({
+        title: "Added to wishlist",
+        description: `${product.name} has been added to your wishlist.`,
+      });
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-12">
@@ -119,7 +139,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
              </CardContent>
           </Card>
           
-          <Button size="lg" className="w-full" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+          <div className="flex items-center gap-4">
+            <Button size="lg" className="w-full" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+            <Button size="lg" variant="outline" onClick={() => handleWishlistToggle(product)} className="px-4">
+              <Heart className={cn("h-6 w-6", isWishlisted && "fill-destructive text-destructive")} />
+              <span className="sr-only">Add to wishlist</span>
+            </Button>
+          </div>
 
           <Separator />
 

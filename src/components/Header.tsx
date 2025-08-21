@@ -2,9 +2,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Coffee, User, ShoppingCart, ChevronDown } from 'lucide-react';
+import { Coffee, User, ShoppingCart, ChevronDown, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +17,7 @@ import { cn } from '@/lib/utils';
 
 export default function Header() {
   const { cart } = useCart();
+  const { wishlist } = useWishlist();
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const productCategories = Array.from(new Set(products.map(p => p.roast))).sort();
@@ -53,6 +55,17 @@ export default function Header() {
           <Link href="/recommend" className="hover:text-primary transition-colors">AI Recommender</Link>
         </nav>
         <div className="flex items-center gap-4">
+          <Link href="/wishlist">
+            <Button variant="ghost" size="icon" className="relative">
+              <Heart className="h-5 w-5" />
+              {wishlist.length > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                  {wishlist.length}
+                </span>
+              )}
+              <span className="sr-only">Wishlist</span>
+            </Button>
+          </Link>
           <Link href="/cart">
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-5 w-5" />
