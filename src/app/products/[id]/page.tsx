@@ -1,5 +1,6 @@
 'use client'
 
+import { use } from 'react';
 import { notFound } from 'next/navigation';
 import { products } from '@/lib/products';
 import type { Product } from '@/lib/products';
@@ -31,10 +32,11 @@ function ProductRating({ rating, reviews }: { rating: number; reviews: number })
   );
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { addToCart } = useCart();
+  const resolvedParams = use(params);
   
-  const product = products.find((p) => p.id.toString() === params.id);
+  const product = products.find((p) => p.id.toString() === resolvedParams.id);
 
   if (!product) {
     notFound();
