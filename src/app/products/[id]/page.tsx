@@ -1,3 +1,4 @@
+
 'use client'
 
 import { use } from 'react';
@@ -33,8 +34,8 @@ function ProductRating({ rating, reviews }: { rating: number; reviews: number })
 }
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { addToCart } = useCart();
   const resolvedParams = use(params);
+  const { addToCart } = useCart();
   
   const product = products.find((p) => p.id.toString() === resolvedParams.id);
 
