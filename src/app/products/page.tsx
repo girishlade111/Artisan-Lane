@@ -1,7 +1,11 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Image from 'next/image';
+import { useCart } from '@/context/CartContext';
+import { useToast } from '@/hooks/use-toast';
 
 const products = [
   { id: 1, name: 'Ethiopian Yirgacheffe', origin: 'Ethiopia', price: 22.00, roast: 'Light', notes: 'Floral, Lemon, Tea', imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'coffee bag' },
@@ -13,6 +17,17 @@ const products = [
 ];
 
 export default function ProductsPage() {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (product: typeof products[0]) => {
+    addToCart(product);
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  }
+
   return (
     <div className="container mx-auto px-4 md:px-6 py-12">
       <div className="text-center mb-12">
@@ -60,7 +75,7 @@ export default function ProductsPage() {
               </div>
               <div className="mt-6 flex justify-between items-center">
                 <span className="text-xl font-semibold text-primary">${product.price.toFixed(2)}</span>
-                <Button>Add to Cart</Button>
+                <Button onClick={() => handleAddToCart(product)}>Add to Cart</Button>
               </div>
             </CardContent>
           </Card>

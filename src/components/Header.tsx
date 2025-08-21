@@ -1,8 +1,14 @@
+'use client';
+
 import Link from 'next/link';
-import { Coffee, User } from 'lucide-react';
+import { Coffee, User, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/context/CartContext';
 
 export default function Header() {
+  const { cart } = useCart();
+  const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <header className="py-4 px-4 md:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b">
       <div className="container mx-auto flex items-center justify-between">
@@ -16,6 +22,17 @@ export default function Header() {
           <Link href="/recommend" className="hover:text-primary transition-colors">AI Recommender</Link>
         </nav>
         <div className="flex items-center gap-4">
+          <Link href="/cart">
+            <Button variant="ghost" size="icon" className="relative">
+              <ShoppingCart className="h-5 w-5" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                  {itemCount}
+                </span>
+              )}
+              <span className="sr-only">Cart</span>
+            </Button>
+          </Link>
           <Link href="/account">
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
