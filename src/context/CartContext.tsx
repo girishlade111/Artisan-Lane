@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+// This mirrors the main Product interface but is scoped to the context
 interface Product {
   id: number;
   name: string;

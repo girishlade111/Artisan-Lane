@@ -2,33 +2,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Image from 'next/image';
+import { products } from '@/lib/products';
 
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Ethiopian Yirgacheffe',
-    origin: 'Ethiopia',
-    price: '$22.00',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'coffee beans',
-  },
-  {
-    id: 2,
-    name: 'Colombian Supremo',
-    origin: 'Colombia',
-    price: '$19.50',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'coffee bag',
-  },
-  {
-    id: 3,
-    name: 'Sumatra Mandheling',
-    origin: 'Indonesia',
-    price: '$21.00',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'brewed coffee',
-  },
-];
+const featuredProducts = products.slice(0, 3);
 
 export default function Home() {
   return (
@@ -59,24 +35,28 @@ export default function Home() {
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {featuredProducts.map((product) => (
               <Card key={product.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardHeader className="p-0">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={600}
-                    height={400}
-                    className="object-cover w-full h-48"
-                    data-ai-hint={product.dataAiHint}
-                  />
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
-                  <CardDescription className="mt-2">{product.origin}</CardDescription>
-                  <div className="mt-4 flex justify-between items-center">
-                    <span className="text-lg font-semibold text-primary">{product.price}</span>
-                    <Button variant="outline">View Details</Button>
-                  </div>
-                </CardContent>
+                <Link href={`/products/${product.id}`} className="block">
+                  <CardHeader className="p-0">
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      width={600}
+                      height={400}
+                      className="object-cover w-full h-48"
+                      data-ai-hint={product.dataAiHint}
+                    />
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
+                    <CardDescription className="mt-2">{product.origin}</CardDescription>
+                    <div className="mt-4 flex justify-between items-center">
+                      <span className="text-lg font-semibold text-primary">${product.price.toFixed(2)}</span>
+                      <Button variant="outline" asChild>
+                        <span>View Details</span>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Link>
               </Card>
             ))}
           </div>
