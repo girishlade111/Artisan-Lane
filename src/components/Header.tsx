@@ -1,13 +1,24 @@
+
 'use client';
 
 import Link from 'next/link';
-import { Coffee, User, ShoppingCart } from 'lucide-react';
+import { Coffee, User, ShoppingCart, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { products } from '@/lib/products';
+import { cn } from '@/lib/utils';
 
 export default function Header() {
   const { cart } = useCart();
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const productCategories = Array.from(new Set(products.map(p => p.roast))).sort();
 
   return (
     <header className="py-4 px-4 md:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b">
@@ -18,7 +29,27 @@ export default function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <Link href="/products" className="hover:text-primary transition-colors">Products</Link>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+               <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium hover:text-primary transition-colors focus-visible:ring-0 focus-visible:ring-offset-0">
+                Products
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href="/products">All Products</Link>
+              </DropdownMenuItem>
+              {productCategories.map(category => (
+                <DropdownMenuItem key={category} asChild>
+                  {/* In a real app, this would link to a filtered page e.g. /products?roast={category} */}
+                  <Link href="/products">{category} Roast</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Link href="/recommend" className="hover:text-primary transition-colors">AI Recommender</Link>
         </nav>
         <div className="flex items-center gap-4">
