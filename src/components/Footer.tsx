@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Coffee, Instagram, Linkedin, Github, Codepen, Mail } from 'lucide-react';
+import { Coffee, Instagram, Linkedin, Github, Codepen, Mail, Globe } from 'lucide-react';
 
 export default function Footer() {
   const socialLinks = [
@@ -7,7 +7,8 @@ export default function Footer() {
     { href: "https://www.linkedin.com/in/girish-lade-075bba201/", icon: Linkedin, label: "LinkedIn" },
     { href: "https://github.com/girishlade111", icon: Github, label: "GitHub" },
     { href: "https://codepen.io/Girish-Lade-the-looper", icon: Codepen, label: "Codepen" },
-    { href: "mailto:girishlade111@gmail.com", icon: Mail, label: "Email" },
+    { href: "mailto:admin@ladestack.in", icon: Mail, label: "Email" },
+    { href: "https://ladestack.in", icon: Globe, label: "Website" },
   ];
 
   return (
@@ -48,20 +49,20 @@ export default function Footer() {
         </div>
         <div className="border-t mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} ArtisanLane. All rights reserved.</p>
-            <div className="flex gap-4">
+<div className="flex gap-2">
                 {socialLinks.map(({ href, icon: Icon, label }) => (
                   <a
                     key={href}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center justify-center w-9 h-9 rounded-full bg-muted/50 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200"
                     aria-label={label}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-4 w-4" />
                   </a>
                 ))}
-             </div>
+              </div>
         </div>
       </div>
     </footer>
