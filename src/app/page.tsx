@@ -26,6 +26,18 @@ const categories = products.reduce((acc, product) => {
     return acc;
   }, [] as { name: string; imageUrl: string; dataAiHint: string }[]).sort((a, b) => a.name.localeCompare(b.name));
 
+// Add Combo category manually if not present
+if (products.some(p => p.isCombo)) {
+    const firstCombo = products.find(p => p.isCombo);
+    if (firstCombo) {
+        categories.push({
+            name: 'Combo',
+            imageUrl: firstCombo.imageUrls[0],
+            dataAiHint: 'coffee combo',
+        });
+    }
+}
+
 
 export default function Home() {
     const { addToCart } = useCart();

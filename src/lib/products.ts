@@ -162,8 +162,10 @@ export const products: Product[] = [
     price: 40.00,
     originalPrice: 43.00,
     imageUrls: [
+        'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1497933321188-941f9ad36b12?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?auto=format&fit=crop&w=800&q=80'
     ],
     dataAiHint: 'coffee combo',
     description: 'Experience the full spectrum of flavor with our Light & Dark Duo. This combo features a bag of our bright and floral Ethiopian Yirgacheffe light roast, and a bag of our bold and earthy Sumatra Mandheling dark roast. It\'s the perfect way to explore two distinct and delicious coffee profiles.',
@@ -183,6 +185,8 @@ export const products: Product[] = [
     imageUrls: [
         'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
         'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80'
     ],
     dataAiHint: 'coffee sampler',
     description: 'Take a tour of our most popular medium roasts. This sampler includes a bag of the classic, well-balanced Colombian Supremo and a bag of the beautifully structured Guatemala Antigua. Discover the rich chocolate, toffee, and caramel notes that make these coffees perennial favorites.',
