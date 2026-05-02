@@ -80,7 +80,7 @@ export default function CartPage() {
                   <span>Total</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
-                <Button className="w-full mt-3 md:mt-4" size="sm" md:size="lg">Proceed to Checkout</Button>
+                <Button className="w-full mt-3 md:mt-4" size="lg">Proceed to Checkout</Button>
               </CardContent>
             </Card>
           </div>

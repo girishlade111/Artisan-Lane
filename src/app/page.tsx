@@ -64,13 +64,13 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mt-6 md:mt-8 px-4">
               <Link href="/recommend">
-                <Button size="sm" md:size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
+                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
                   Find Your Match
                   <ArrowRight className="ml-1 md:ml-2 h-4 md:h-5 w-4 md:w-5" />
                 </Button>
               </Link>
               <Link href="/products">
-                <Button size="sm" md:size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black">Shop All Coffee</Button>
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black">Shop All Coffee</Button>
               </Link>
             </div>
         </div>
