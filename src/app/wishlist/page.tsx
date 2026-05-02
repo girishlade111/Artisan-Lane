@@ -24,12 +24,61 @@ export default function WishlistPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12">
-      <div className="mb-12">
-        <h1 className="text-4xl font-headline font-bold flex items-center gap-3">
-          <Heart className="h-10 w-10 text-primary" /> Your Wishlist
+<div className="container mx-auto px-3 md:px-6 py-8 md:py-12">
+      <div className="mb-6 md:mb-12">
+        <h1 className="text-2xl md:text-4xl font-headline font-bold flex items-center gap-2 md:gap-3">
+          <Heart className="h-6 md:h-10 w-6 md:w-10 text-primary" /> Your Wishlist
         </h1>
       </div>
+
+      {wishlist.length === 0 ? (
+        <div className="text-center py-12 md:py-20">
+          <p className="text-lg md:text-2xl text-muted-foreground mb-4">Your wishlist is empty.</p>
+          <p className="text-sm md:text-base text-muted-foreground mb-6 md:mb-8">Looks like you haven't added anything to your wishlist yet.</p>
+          <Link href="/products">
+            <Button>Explore Products</Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+          {wishlist.map((item) => (
+            <Card key={item.id} className="group relative overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+               <Button 
+                variant="ghost" 
+                size="icon" 
+                className="absolute top-2 right-2 z-10 h-8 w-8 rounded-full bg-background/50 hover:bg-background/80"
+                onClick={() => removeFromWishlist(item.id)}
+               >
+                <X className="h-4 md:h-5 w-4 md:w-5 text-muted-foreground" />
+                <span className="sr-only">Remove from wishlist</span>
+              </Button>
+              <Link href={`/products/${item.id}`}>
+                <Image
+                  src={item.imageUrls[0]}
+                  alt={item.name}
+                  width={600}
+                  height={400}
+                  className="rounded-t-lg object-cover w-full h-40 md:h-52"
+                  data-ai-hint={item.dataAiHint}
+                />
+              </Link>
+              <CardContent className="p-3 md:p-4">
+                <div className="flex-grow">
+                  <h2 className="font-bold font-headline text-base md:text-lg truncate" title={item.name}>{item.name}</h2>
+                  <p className="text-sm md:text-base text-muted-foreground">${item.price.toFixed(2)}</p>
+                </div>
+                <Button 
+                    className="w-full mt-3 md:mt-4 text-sm" 
+                    size="sm"
+                    onClick={() => handleMoveToCart(item)}>
+                    <ShoppingCart className="mr-1 md:mr-2 h-3 md:h-4 w-3 md:w-4" /> Move to Cart
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
 
       {wishlist.length === 0 ? (
         <div className="text-center py-20">
