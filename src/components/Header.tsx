@@ -40,7 +40,7 @@ export default function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem key="all" asChild>
                 <Link href="/products">All Products</Link>
               </DropdownMenuItem>
               {productCategories.map(category => (
