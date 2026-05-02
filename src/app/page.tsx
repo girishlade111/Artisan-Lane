@@ -52,25 +52,25 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-white overflow-hidden">
+      <section className="relative w-full h-[50vh] md:h-[80vh] flex items-center justify-center text-white overflow-hidden">
         <ShaderAnimation />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 container px-4 md:px-6 text-center">
-            <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight">
+        <div className="relative z-10 container px-3 md:px-6 text-center">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl font-headline font-bold tracking-tight px-2">
               Discover Your Perfect Coffee
             </h1>
-            <p className="max-w-xl text-lg md:text-xl text-white/80 mx-auto mt-4">
+            <p className="max-w-xl text-sm md:text-lg lg:text-xl text-white/80 mx-auto mt-3 md:mt-4 px-4">
               From the world's best artisans to your cup. Personalized subscriptions tailored to your unique taste profile.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mt-6 md:mt-8 px-4">
               <Link href="/recommend">
-                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
+                <Button size="sm" md:size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto">
                   Find Your Match
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-1 md:ml-2 h-4 md:h-5 w-4 md:w-5" />
                 </Button>
               </Link>
               <Link href="/products">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black">Shop All Coffee</Button>
+                <Button size="sm" md:size="lg" variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-black">Shop All Coffee</Button>
               </Link>
             </div>
         </div>
