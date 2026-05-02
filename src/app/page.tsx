@@ -176,11 +176,11 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Combos</h2>
           <p className="mt-2 text-center text-muted-foreground">Get the best of both worlds with our curated coffee combos.</p>
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <div className="mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
             {comboProducts.map((combo) => (
                 <Card key={combo.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="md:flex">
-                    <div className="md:w-1/2">
+                <div className="flex flex-col md:flex-row">
+                    <div className="w-full md:w-1/2 h-48 md:h-auto">
                         <Link href={`/products/${combo.id}`}>
                             <Image
                                 src={combo.imageUrls[0]}
@@ -192,20 +192,20 @@ export default function Home() {
                             />
                         </Link>
                     </div>
-                    <div className="p-6 md:w-1/2 flex flex-col">
+                    <div className="p-4 md:p-6 md:w-1/2 flex flex-col">
                         <Link href={`/products/${combo.id}`} className="flex-grow">
-                            <CardTitle className="font-headline text-xl">{combo.name}</CardTitle>
-                            <CardDescription className="mt-2">{combo.description.substring(0, 100)}...</CardDescription>
-                            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                            <CardTitle className="font-headline text-lg md:text-xl">{combo.name}</CardTitle>
+                            <CardDescription className="mt-1 md:mt-2 text-sm">{combo.description.substring(0, 80)}...</CardDescription>
+                            <ul className="mt-3 md:mt-4 space-y-1 md:space-y-2 text-xs md:text-sm text-muted-foreground">
                                 {combo.comboProducts?.map(p => <li key={p.id}>- {p.name}</li>)}
                             </ul>
                         </Link>
-                        <div className="mt-4 flex justify-between items-center">
-                            <span className="text-lg font-semibold text-primary">
+                        <div className="mt-3 md:mt-4 flex justify-between items-center">
+                            <span className="text-base md:text-lg font-semibold text-primary">
                                 ${combo.price.toFixed(2)}{' '}
-                                {combo.originalPrice && <span className="text-sm text-muted-foreground line-through">${combo.originalPrice.toFixed(2)}</span>}
+                                {combo.originalPrice && <span className="text-xs md:text-sm text-muted-foreground line-through">${combo.originalPrice.toFixed(2)}</span>}
                             </span>
-                            <Button onClick={() => handleAddToCart(combo)}>Add to Cart</Button>
+                            <Button size="sm" onClick={() => handleAddToCart(combo)}>Add to Cart</Button>
                         </div>
                     </div>
                 </div>
