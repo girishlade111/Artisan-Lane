@@ -42,11 +42,11 @@ export default function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem key="all" asChild>
+              <DropdownMenuItem asChild>
                 <Link href="/products">All Products</Link>
               </DropdownMenuItem>
-              {productCategories.map(category => (
-                <DropdownMenuItem key={category} asChild>
+              {productCategories.map((category, index) => (
+                <DropdownMenuItem key={`category-${index}`} asChild>
                   <Link href="/products">{category} Roast</Link>
                 </DropdownMenuItem>
               ))}
