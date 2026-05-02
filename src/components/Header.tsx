@@ -2,7 +2,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Coffee, User, ShoppingCart, ChevronDown, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { Coffee, User, ShoppingCart, ChevronDown, Heart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
@@ -13,22 +14,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { products } from '@/lib/products';
-import { cn } from '@/lib/utils';
 
 export default function Header() {
   const { cart } = useCart();
   const { wishlist } = useWishlist();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const productCategories = Array.from(new Set(products.map(p => p.roast))).sort();
 
   return (
-    <header className="py-4 px-4 md:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b">
+    <header className="py-3 px-4 md:py-4 md:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b">
       <div className="container mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Coffee className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold font-headline text-primary">ArtisanLane</span>
+          <span className="text-lg md:text-xl font-bold font-headline text-primary">ArtisanLane</span>
         </Link>
+        
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link href="/" className="hover:text-primary transition-colors">Home</Link>
           
@@ -45,7 +47,6 @@ export default function Header() {
               </DropdownMenuItem>
               {productCategories.map(category => (
                 <DropdownMenuItem key={category} asChild>
-                  {/* In a real app, this would link to a filtered page e.g. /products?roast={category} */}
                   <Link href="/products">{category} Roast</Link>
                 </DropdownMenuItem>
               ))}
@@ -54,7 +55,8 @@ export default function Header() {
 
           <Link href="/recommend" className="hover:text-primary transition-colors">AI Recommender</Link>
         </nav>
-        <div className="flex items-center gap-4">
+
+        <div className="flex items-center gap-2 md:gap-4">
           <Link href="/wishlist">
             <Button variant="ghost" size="icon" className="relative">
               <Heart className="h-5 w-5" />
@@ -77,14 +79,62 @@ export default function Header() {
               <span className="sr-only">Cart</span>
             </Button>
           </Link>
-          <Link href="/account">
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-              <span className="sr-only">Account</span>
-            </Button>
-          </Link>
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
       </div>
+
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b shadow-lg">
+          <nav className="flex flex-col p-4 gap-2">
+            <Link 
+              href="/" 
+              className="px-4 py-3 rounded-lg hover:bg-muted text-base font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link 
+              href="/products" 
+              className="px-4 py-3 rounded-lg hover:bg-muted text-base font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              All Products
+            </Link>
+            {productCategories.map(category => (
+              <Link 
+                key={category}
+                href="/products" 
+                className="px-4 py-3 rounded-lg hover:bg-muted text-base font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {category} Roast
+              </Link>
+            ))}
+            <Link 
+              href="/recommend" 
+              className="px-4 py-3 rounded-lg hover:bg-muted text-base font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              AI Recommender
+            </Link>
+            <Link 
+              href="/account" 
+              className="px-4 py-3 rounded-lg hover:bg-muted text-base font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Account
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
