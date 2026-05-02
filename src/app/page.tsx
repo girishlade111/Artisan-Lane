@@ -94,7 +94,7 @@ export default function Home() {
                       data-ai-hint={category.dataAiHint}
                     />
                   </div>
-                  <span className="font-headline text-lg font-semibold text-primary">{category.name} Roast</span>
+                  <span className="font-headline text-lg font-semibold text-primary">{category.name}{category.name === 'Combo' ? 's' : ' Roast'}</span>
                 </Link>
               ))}
             </div>
