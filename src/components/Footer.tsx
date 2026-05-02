@@ -13,35 +13,35 @@ export default function Footer() {
 
   return (
     <footer className="border-t bg-background">
-      <div className="container mx-auto py-12 px-4 md:px-6">
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="md:col-span-4 flex flex-col items-start gap-4">
+      <div className="container mx-auto py-10 px-4 md:py-12 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-6 md:gap-8">
+          <div className="col-span-2 md:col-span-4 flex flex-col items-start gap-4">
             <Link href="/" className="flex items-center gap-2">
                 <Coffee className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold font-headline text-primary">ArtisanLane</span>
+                <span className="text-lg md:text-xl font-bold font-headline text-primary">ArtisanLane</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
                 Discover your perfect coffee, from the world's best artisans to your cup.
             </p>
           </div>
-          <div className="md:col-span-2">
-             <h3 className="font-semibold mb-4 font-headline text-foreground">Explore</h3>
-            <nav className="flex flex-col gap-3 text-sm">
+          <div className="col-span-1 md:col-span-2">
+             <h3 className="font-semibold mb-3 md:mb-4 font-headline text-foreground text-sm md:text-base">Explore</h3>
+            <nav className="flex flex-col gap-2 md:gap-3 text-sm">
               <Link href="/products" className="text-muted-foreground hover:text-primary transition-colors">Products</Link>
               <Link href="/recommend" className="text-muted-foreground hover:text-primary transition-colors">AI Recommender</Link>
               <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link>
             </nav>
           </div>
-          <div className="md:col-span-2">
-            <h3 className="font-semibold mb-4 font-headline text-foreground">Support</h3>
-            <nav className="flex flex-col gap-3 text-sm">
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="font-semibold mb-3 md:mb-4 font-headline text-foreground text-sm md:text-base">Support</h3>
+            <nav className="flex flex-col gap-2 md:gap-3 text-sm">
               <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link>
               <Link href="/faq" className="text-muted-foreground hover:text-primary transition-colors">FAQ</Link>
             </nav>
           </div>
-           <div className="md:col-span-2">
-            <h3 className="font-semibold mb-4 font-headline text-foreground">Legal</h3>
-            <nav className="flex flex-col gap-3 text-sm">
+           <div className="col-span-2 md:col-span-2">
+            <h3 className="font-semibold mb-3 md:mb-4 font-headline text-foreground text-sm md:text-base">Legal</h3>
+            <nav className="flex flex-col gap-2 md:gap-3 text-sm">
               <Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</Link>
               <Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
             </nav>
