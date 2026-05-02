@@ -10,6 +10,11 @@ import { WishlistProvider } from '@/context/WishlistContext';
 export const metadata: Metadata = {
   title: 'ArtisanLane',
   description: 'Curated artisanal coffee subscriptions.',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   icons: {
     icon: '/favicon.svg',
     apple: '/favicon.svg',
