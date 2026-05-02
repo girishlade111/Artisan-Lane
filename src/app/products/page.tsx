@@ -35,7 +35,7 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {products.map((product) => (
           <Card key={product.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <Link href={`/products/${product.id}`} className="flex flex-col flex-grow">
@@ -45,24 +45,24 @@ export default function ProductsPage() {
                   alt={product.name}
                   width={600}
                   height={400}
-                  className="object-cover w-full h-52"
+                  className="object-cover w-full h-40 md:h-52"
                   data-ai-hint={product.dataAiHint}
                 />
               </CardHeader>
-              <CardContent className="p-6 flex flex-col flex-grow">
+              <CardContent className="p-4 md:p-6 flex flex-col flex-grow">
                 <div className="flex-grow">
-                  <CardDescription className="text-sm">{product.origin}</CardDescription>
-                  <CardTitle className="font-headline text-xl mt-1">{product.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-2">Notes: {product.notes}</p>
+                  <CardDescription className="text-xs md:text-sm">{product.origin}</CardDescription>
+                  <CardTitle className="font-headline text-lg md:text-xl mt-1">{product.name}</CardTitle>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1 md:mt-2">Notes: {product.notes}</p>
                 </div>
-                <div className="mt-6 flex justify-between items-center">
-                  <span className="text-xl font-semibold text-primary">${product.price.toFixed(2)}</span>
+                <div className="mt-4 md:mt-6 flex justify-between items-center">
+                  <span className="text-lg md:text-xl font-semibold text-primary">${product.price.toFixed(2)}</span>
                 </div>
               </CardContent>
             </Link>
-             <div className="p-6 pt-0">
-                <ProductCardActions product={product} />
-              </div>
+             <div className="p-4 md:p-6 pt-0">
+                 <ProductCardActions product={product} />
+               </div>
           </Card>
         ))}
       </div>
