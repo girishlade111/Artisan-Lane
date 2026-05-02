@@ -167,6 +167,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
 }
 
 @layer components {
