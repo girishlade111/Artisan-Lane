@@ -106,7 +106,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Featured Coffees</h2>
           <p className="mt-2 text-center text-muted-foreground">Hand-picked by our experts, loved by our community.</p>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {featuredProducts.map((product) => (
               <Card key={product.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <Link href={`/products/${product.id}`} className="block">
@@ -116,16 +116,16 @@ export default function Home() {
                       alt={product.name}
                       width={600}
                       height={400}
-                      className="object-cover w-full h-48"
+                      className="object-cover w-full h-40 md:h-48"
                       data-ai-hint={product.dataAiHint}
                     />
                   </CardHeader>
-                  <CardContent className="p-6">
-                    <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
-                    <CardDescription className="mt-2">{product.origin}</CardDescription>
-                    <div className="mt-4 flex justify-between items-center">
-                      <span className="text-lg font-semibold text-primary">${product.price.toFixed(2)}</span>
-                      <Button variant="outline" asChild>
+                  <CardContent className="p-4 md:p-6">
+                    <CardTitle className="font-headline text-lg md:text-xl">{product.name}</CardTitle>
+                    <CardDescription className="mt-1 md:mt-2 text-sm">{product.origin}</CardDescription>
+                    <div className="mt-3 md:mt-4 flex justify-between items-center">
+                      <span className="text-base md:text-lg font-semibold text-primary">${product.price.toFixed(2)}</span>
+                      <Button variant="outline" size="sm" asChild>
                         <span>View Details</span>
                       </Button>
                     </div>
@@ -141,7 +141,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Popular Choices</h2>
           <p className="mt-2 text-center text-muted-foreground">Discover what other coffee lovers are enjoying.</p>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {popularProducts.map((product) => (
               <Card key={product.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <Link href={`/products/${product.id}`} className="block">
@@ -151,16 +151,16 @@ export default function Home() {
                       alt={product.name}
                       width={600}
                       height={400}
-                      className="object-cover w-full h-48"
+                      className="object-cover w-full h-40 md:h-48"
                       data-ai-hint={product.dataAiHint}
                     />
                   </CardHeader>
-                  <CardContent className="p-6">
-                    <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
-                    <CardDescription className="mt-2">{product.origin}</CardDescription>
-                    <div className="mt-4 flex justify-between items-center">
-                      <span className="text-lg font-semibold text-primary">${product.price.toFixed(2)}</span>
-                      <Button variant="outline" asChild>
+                  <CardContent className="p-4 md:p-6">
+                    <CardTitle className="font-headline text-lg md:text-xl">{product.name}</CardTitle>
+                    <CardDescription className="mt-1 md:mt-2 text-sm">{product.origin}</CardDescription>
+                    <div className="mt-3 md:mt-4 flex justify-between items-center">
+                      <span className="text-base md:text-lg font-semibold text-primary">${product.price.toFixed(2)}</span>
+                      <Button variant="outline" size="sm" asChild>
                         <span>View Details</span>
                       </Button>
                     </div>
