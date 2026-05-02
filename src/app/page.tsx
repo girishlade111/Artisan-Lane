@@ -80,11 +80,11 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center">Shop by Category</h2>
            <p className="mt-2 text-center text-muted-foreground">Find your favorite roast.</p>
-          <div className="mt-12">
-            <div className="flex justify-center gap-8 md:gap-12 overflow-x-auto pb-4 -mx-4 px-4">
+          <div className="mt-8 md:mt-12">
+            <div className="flex justify-center gap-4 md:gap-12 overflow-x-auto pb-4 -mx-4 px-4">
               {categories.map((category) => (
-                <Link href="/products" key={category.name} className="flex flex-col items-center gap-3 flex-shrink-0 group">
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-transparent group-hover:border-accent transition-all duration-300 shadow-lg">
+                <Link href="/products" key={category.name} className="flex flex-col items-center gap-2 md:gap-3 flex-shrink-0 group">
+                  <div className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-transparent group-hover:border-accent transition-all duration-300 shadow-lg">
                     <Image
                       src={category.imageUrl}
                       alt={category.name}
@@ -94,7 +94,7 @@ export default function Home() {
                       data-ai-hint={category.dataAiHint}
                     />
                   </div>
-                  <span className="font-headline text-lg font-semibold text-primary">{category.name}{category.name === 'Combo' ? 's' : ' Roast'}</span>
+                  <span className="font-headline text-sm md:text-lg font-semibold text-primary">{category.name}{category.name === 'Combo' ? 's' : ' Roast'}</span>
                 </Link>
               ))}
             </div>
