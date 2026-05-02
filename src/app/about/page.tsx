@@ -18,7 +18,7 @@ export default function AboutPage() {
         </div>
         <div>
           <Image
-            src="https://placehold.co/600x400.png"
+            src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&q=80&w=1000"
             alt="Artisan coffee roaster"
             width={600}
             height={400}
