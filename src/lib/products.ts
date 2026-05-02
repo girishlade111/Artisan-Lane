@@ -25,10 +25,10 @@ export const products: Product[] = [
     roast: 'Light',
     notes: 'Floral, Lemon, Tea',
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png'
+        'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&q=80&w=800',
+        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80'
     ],
     dataAiHint: 'coffee bag',
     description: 'A bright and aromatic light roast with delicate floral notes and a refreshing citrusy finish. Grown in the renowned Yirgacheffe region, this coffee is a testament to Ethiopia\'s rich coffee heritage.',
@@ -49,9 +49,9 @@ export const products: Product[] = [
     roast: 'Medium',
     notes: 'Caramel, Nutty, Citrus',
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'coffee beans',
     description: 'A classic, well-balanced medium roast from the heart of Colombia. Expect smooth notes of caramel and toasted nuts, with a pleasant hint of citrus acidity that brightens the cup.',
@@ -73,9 +73,9 @@ export const products: Product[] = [
     notes: 'Earthy, Cedar, Dark Chocolate',
     imageUrls: [
         'https://images.unsplash.com/photo-1646325742177-21f298f470c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxEYXJrJTIwUm9hc3R8ZW58MHx8fHwxNzU1ODAwMDI0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png'
+        'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1524350300060-d39f447120e7?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80'
     ],
     dataAiHint: 'coffee farm',
     description: 'A bold and full-bodied dark roast from the island of Sumatra. Its distinctive earthy and cedar notes are complemented by a rich, dark chocolate finish, offering a truly unique flavor experience.',
@@ -96,8 +96,8 @@ export const products: Product[] = [
     roast: 'Light-Medium',
     notes: 'Blackcurrant, Winey, Bright',
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1541167760496-1628856ab752?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'brewed coffee',
     description: 'Renowned for its vibrant acidity and complex fruit notes, this Kenyan coffee is a delight. Look for a distinct blackcurrant flavor with a wine-like brightness that makes for a lively and memorable cup.',
@@ -118,9 +118,9 @@ export const products: Product[] = [
     roast: 'Medium',
     notes: 'Chocolate, Toffee, Apple',
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'coffee cup',
     description: 'A beautifully structured coffee from the Antigua Valley of Guatemala. This medium roast boasts rich chocolate and toffee notes, balanced by a subtle malic acidity reminiscent of a crisp apple.',
@@ -141,9 +141,9 @@ export const products: Product[] = [
     roast: 'Medium-Dark',
     notes: 'Nutty, Chocolate, Low Acidity',
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'roasted coffee',
     description: 'A smooth and satisfying coffee from the Cerrado region of Brazil. This medium-dark roast is known for its classic nutty and chocolate flavor profile with a very low acidity, making it perfect for espresso or a rich drip brew.',
@@ -162,8 +162,8 @@ export const products: Product[] = [
     price: 40.00,
     originalPrice: 43.00,
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1497933321188-941f9ad36b12?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'coffee combo',
     description: 'Experience the full spectrum of flavor with our Light & Dark Duo. This combo features a bag of our bright and floral Ethiopian Yirgacheffe light roast, and a bag of our bold and earthy Sumatra Mandheling dark roast. It\'s the perfect way to explore two distinct and delicious coffee profiles.',
@@ -181,8 +181,8 @@ export const products: Product[] = [
     price: 36.00,
     originalPrice: 39.50,
     imageUrls: [
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80',
     ],
     dataAiHint: 'coffee sampler',
     description: 'Take a tour of our most popular medium roasts. This sampler includes a bag of the classic, well-balanced Colombian Supremo and a bag of the beautifully structured Guatemala Antigua. Discover the rich chocolate, toffee, and caramel notes that make these coffees perennial favorites.',
