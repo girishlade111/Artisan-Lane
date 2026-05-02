@@ -10,19 +10,19 @@ import ProductCardActions from '@/components/ProductCardActions';
 export default function ProductsPage() {
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary">Our Coffee Collection</h1>
-        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+    <div className="container mx-auto px-3 md:px-6 py-8 md:py-12">
+      <div className="text-center mb-8 md:mb-12">
+        <h1 className="text-2xl md:text-4xl md:text-5xl font-headline font-bold text-primary">Our Coffee Collection</h1>
+        <p className="mt-3 md:mt-4 max-w-2xl mx-auto text-sm md:text-lg text-muted-foreground px-4">
           Explore our curated selection of single-origin coffees from the world's most renowned growing regions.
         </p>
       </div>
       
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 md:mb-8 gap-3 md:gap-4">
         <p className="text-sm text-muted-foreground">Showing {products.length} products</p>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <Select>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[140px] md:w-[180px]">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
@@ -35,7 +35,7 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {products.map((product) => (
           <Card key={product.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
             <Link href={`/products/${product.id}`} className="flex flex-col flex-grow">
