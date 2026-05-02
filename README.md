@@ -126,7 +126,7 @@ flowchart TB
 ### Next.js Configuration (`next.config.ts`)
 - TypeScript build errors ignored
 - ESLint ignored during build
-- Image domains: `placehold.co`, `images.unsplash.com`
+- Image domains: `images.unsplash.com`
 
 ### Tailwind Configuration (`tailwind.config.ts`)
 - CSS variables enabled
