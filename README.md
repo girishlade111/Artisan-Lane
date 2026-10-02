@@ -570,3 +570,7 @@ For questions, issues, or feature requests, please refer to the project document
 ![Google AI](https://img.shields.com/badge/Google_AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
 </div>
+
+## Author
+
+Built by Girish Lade — https://ladestack.in
